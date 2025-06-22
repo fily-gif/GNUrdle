@@ -12,7 +12,7 @@ jobs:
           nimble-version: 'latest'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Build
-        run: git clone https://github.com/fily-gif/GNUrdle; cd GNUrdle; nim compile gnurdle.nim 
+        run: git clone https://github.com/fily-gif/GNUrdle; cd GNUrdle; ~/.nimble/bin/nim compile gnurdle.nim 
       - name: Test
         run: file gnurdle
       - name: Release
