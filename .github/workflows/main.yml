@@ -1,0 +1,19 @@
+name: Main
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build
+        run: git clone https://github.com/fily-gif/GNUrdle; cd GNUrdle; nim compile gnurdle.nim 
+      - name: Test
+        run: file gnurdle
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: github.ref_type == 'tag'
+        with:
+          files: gnurdle
