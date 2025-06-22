@@ -9,7 +9,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Build
-        run: git clone https://github.com/fily-gif/GNUrdle; cd GNUrdle; nim compile gnurdle.nim 
+        run: apt-get install nim -y; git clone https://github.com/fily-gif/GNUrdle; cd GNUrdle; nim compile gnurdle.nim 
       - name: Test
         run: file gnurdle
       - name: Release
