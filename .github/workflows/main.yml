@@ -9,10 +9,13 @@ jobs:
       - uses: actions/checkout@v4
       - uses: iffy/install-nim@v5
       - run: nimble install -y
+      
       - name: Build
-      - run: ls -la ~/work/GNUrdle
+        run: nim c gnurdle.nim
+
       - name: Test
         run: file gnurdle
+
       - name: Release
         uses: softprops/action-gh-release@v2
         if: github.ref_type == 'tag'
