@@ -7,12 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: nim-lang/setup-nimble-action@v1
-        with:
-          nimble-version: 'latest'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: iffy/install-nim@v5
+      - run: nimble install -y
       - name: Build
-        run: git clone https://github.com/fily-gif/GNUrdle; cd GNUrdle; ls -la ~/work/GNUrdle/GNUrdle/.nimble_runtime/bin/
+      - run: ls -la ~/work/GNUrdle
       - name: Test
         run: file gnurdle
       - name: Release
