@@ -1,22 +1,33 @@
-name: Main
+name: Build and Release
 
-on: push
+on:
+  push:
+    branches:
+      - '**'
+    tags:
+      - '**'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: iffy/install-nim@v5
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Nim
+        uses: iffy/install-nim@v5
       
-      - name: Build
-        run: nim c gnurdle.nim
+      - name: Build executable
+        run: nim c -d:release gnurdle.nim
 
-      - name: Test
-        run: file gnurdle
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gnurdle-binary
+          path: gnurdle
 
-      - name: Release
-        uses: softprops/action-gh-release@v2
+      - name: Create GitHub Release
         if: github.ref_type == 'tag'
+        uses: softprops/action-gh-release@v2
         with:
           files: gnurdle
