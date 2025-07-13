@@ -2,7 +2,7 @@ import std/random
 import std/strformat
 import std/strutils
 import std/terminal
-#test github actions (pls work)
+#test github actions (pls work) aaa
 randomize()
 
 const fn = "words/unix.txt"
